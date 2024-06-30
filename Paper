@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+void space(int a)
+{
+	cout << "|  ";
+	for(int i = 0; i < a; i++)
+	{
+		cout << " ";
+	}
+	cout << "  |" << endl;
+}
+
+void paper(int a, int b, string c)
+{
+	string content[a][b];
+	string line{"==="};
+	cout << line;
+	for(int i = 0; i < a; i++)
+	{
+		cout << "=";
+	}
+	cout << line << endl;      
+	space(a);
+	for(int i = 0; i < b; i++)
+	{
+		cout << "|  ";
+		for(int j = 0; j < a; j++)
+		{
+			content[i][j] = ( ( (j+(a*i)) < c.length() ) ? c.at(j+(a*i)) : '_' );
+			cout << content[i][j];
+		}
+		cout << "  |" << endl;
+	}
+	space(a);
+	cout << line;
+	for(int i = 0; i < a; i++)
+	{
+		cout << "=";
+	}
+	cout << line << endl;
+}
+
+int main()
+{
+	int Length, Height;
+	string lul;
+	cout << "Enter the paper length: ";
+	cin >> Length;
+	cin.ignore();
+	cout << "Enter the paper height: ";
+	cin >> Height;
+	cin.ignore();
+	cout << "Enter the content of this paper: " << endl;
+	getline(cin, lul);
+	paper(Length, Height, lul);
+}
