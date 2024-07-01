@@ -1,91 +1,54 @@
 #include <iostream>
 using namespace std;
 
-void margin(int a)
-{
-	for(int i = 0; i < a; i++)
-	{
-		cout << "  ";
+char Q = ' '; char W = '|'; char E = '=';
+
+void margin(int a) {
+	for(int i = 0; i < a; i++) { cout << Q << Q; }
+}
+
+void space(int a, int b) {
+	for(int i = 0; i < b; i++) {
+		cout << W; margin(b);
+		for(int j = 0; j < a; j++) { cout << Q; } margin(b);
+		cout << W << endl;
 	}
 }
 
-void space(int a, int b)
-{
-	for(int i = 0; i < b; i++)
-	{
-		cout << "|";
-		margin(b);
-		for(int j = 0; j < a; j++)
-		{
-			cout << " ";
-		}
-		margin(b);
-		cout << "|" << endl;
-	}
+void line(int a, int b) {
+	if(b == 0) { cout << E; }
+	for(int i = 0; i < a; i++) { cout << E; }
+	if(b == 1) { cout << E; }
 }
 
-void line(int a, int b)
-{
-	if(b == 0)
-	{
-		cout << "=";
-	}
-	for(int i = 0; i < a; i++)
-	{
-		cout << "=";
-	}
-	if(b == 1)
-	{
-		cout << "=";
-	}
-}
-
-void paper(int m, int a, int b, string c)
-{
-	string content[a][b];
-	line(m, 0);
-	for(int i = 0; i < a+m*2; i++)
-	{
-		cout << "=";
-	}
-	line(m, 1);
-	cout << endl;
-	space(a, m);
-	for(int i = 0; i < b; i++)
-	{
-		cout << "|";
-		margin(m);
-		for(int j = 0; j < a; j++)
-		{
+void paper(int m, int a, int b, string c) {
+	string content[a][b]; line(m, 0);
+	for(int i = 0; i < a+m*2; i++) { cout << E; }
+	line(m, 1); cout << endl; space(a, m);
+	for(int i = 0; i < b; i++) {
+		cout << W; margin(m);
+		for(int j = 0; j < a; j++) {
 			content[i][j] = ( ( (j+(a*i)) < c.length() ) ? c.at(j+(a*i)) : ' ' );
 			cout << content[i][j];
 		}
-		margin(m);
-		cout << "|" << endl;
+		margin(m); cout << W << endl;
 	}
-	space(a, m);
-	line(m, 0);
-	for(int i = 0; i < a+m*2; i++)
-	{
-		cout << "=";
-	}
-	line(m, 1);
-	cout << endl;
+	space(a, m); line(m, 0);
+	for(int i = 0; i < a+m*2; i++) { cout << E; }
+	line(m, 1); cout << endl;
 }
 
-int main()
-{
-	int Margin, Length, Height;
-    string lul;
-    cout << "Enter the paper margin: ";
-    cin >> Margin;
-    cout << "Enter the paper length: ";
-    cin >> Length;
-    cin.ignore();
-    cout << "Enter the paper height: ";
-    cin >> Height;
-    cin.ignore();
-    cout << "Enter the content of this paper: ";
-    getline(cin, lul);
-    paper(Margin, Length, Height, lul);
+int main() {
+	int Margin, Length, Height; string lul;
+	cout << "Enter the paper margin: ";
+	cin >> Margin;
+	cout << "Enter the paper length: ";
+	cin >> Length;
+	cin.ignore();
+	cout << "Enter the paper height: ";
+	cin >> Height;
+	cin.ignore();
+	cout << "Enter the content of this paper: ";
+	getline(cin, lul);
+	paper(Margin, Length, Height, lul);
 }
